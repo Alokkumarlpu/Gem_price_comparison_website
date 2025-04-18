@@ -85,7 +85,7 @@ $page_title = "About Us - " . escape_html(SITE_NAME);
           <p class="text-gray-600 transition-colors duration-300">Founder & Developer</p>
         </div>
         <div class="team-member bg-white rounded-lg shadow-lg p-6 text-center transition-colors duration-300">
-          <img src="/api/placeholder/120/120" alt="Pallavi" class="mx-auto rounded-full mb-4 border-4 border-purple-200">
+          <img src="../images/pallavi.jpeg" alt="Pallavi" class="mx-auto rounded-full mb-4 border-4 border-purple-200">
           <h4 class="text-xl font-semibold">Pallavi</h4>
           <p class="text-gray-600 transition-colors duration-300">UX Designer</p>
         </div>
