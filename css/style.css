@@ -1,0 +1,1215 @@
+/* --- GeM Price Comparison - style.css --- */
+/* Version: 1.0 */
+
+/* --- Table of Contents ---
+1.  Global Styles & Variables
+2.  Utility Classes
+3.  Layout & Container
+4.  Typography
+5.  Buttons & Forms
+6.  Header Styles
+7.  Mobile Menu Styles
+8.  Hero Section
+9.  Search Loader
+10. Results Section & Product Cards
+11. Content Sections (How-it-works, About, etc.)
+12. Page Specific Styles (Shared elements like page headers)
+13. Footer Styles
+14. Responsive Design (Media Queries)
+----------------------------- */
+
+
+/* --- 1. Global Styles & Variables --- */
+:root {
+    --primary-color: #0056b3;    /* Dark Blue (Govt/Tech) */
+    --secondary-color: #28a745;  /* Green (Success/Comparison/Savings) */
+    --accent-color: #ffc107;     /* Yellow/Gold (Highlighting/CTA) */
+    --light-gray: #f2f7f9;       /* Very Light Gray (Backgrounds) */
+    --medium-gray: #97999c;      /* Light Gray (Borders) */
+    --border-gray: #76787b;       /* Standard Border Gray */
+    --dark-gray: #2f3032;        /* Dark Gray (Headings/Footer BG) */
+    --text-color: #212529;       /* Body Text Color */
+    --text-color-muted: #6c757d; /* Muted Text Color */
+    --danger-color: #dc3545;      /* Red (Errors) */
+    --success-color: #198754;     /* Darker Green (Success messages) */
+    --success-bg-light: #d1e7dd;  /* Light Green (Success background) */
+    --danger-bg-light: #f8d7da;   /* Light Red (Error background) */
+
+    --heading-font: 'Poppins', sans-serif;
+    --body-font: 'Poppins', sans-serif;
+
+    --header-height: 70px; /* Adjust as needed */
+    --border-radius: 5px;
+    --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07);
+    --box-shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Basic Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--body-font);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+    /* Add padding top if header is fixed/sticky and opaque */
+     padding-top: var(--header-height); /* If header is sticky */
+     /* If header is not sticky, remove padding-top */
+     min-height: calc(100vh - var(--header-height) - 100px); /* Adjust 100px based on approx footer height */
+}
+
+img, video, svg {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Prevent bottom space */
+}
+
+/* --- 2. Utility Classes --- */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* Prevent content wrapping */
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.d-block { display: block; }
+.d-inline-block { display: inline-block; }
+.d-flex { display: flex; }
+.d-none { display: none; } /* Use sparingly, prefer conditional rendering */
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+
+/* --- 3. Layout & Container --- */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Standard max width */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* --- 4. Typography --- */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+a:hover {
+    color: darken(var(--primary-color), 15%);
+    opacity: 0.9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    color: var(--dark-gray);
+    line-height: 1.3;
+    margin-bottom: 0.75em; /* Consistent bottom margin */
+    font-weight: 600;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; } /* Responsive font size */
+h2 { font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 1.5em; text-align: center;}
+h3 { font-size: clamp(1.3rem, 3vw, 1.5rem); }
+h4 { font-size: clamp(1.1rem, 2.5vw, 1.2rem); }
+
+p {
+    margin-bottom: 1em;
+}
+
+ul, ol {
+    margin-bottom: 1em;
+    padding-left: 20px; /* Default indentation */
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+strong, b { font-weight: 700; }
+
+/* --- 5. Buttons & Forms --- */
+.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
+    display: inline-block;
+    padding: 10px 20px;
+    font-family: var(--heading-font);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease;
+    user-select: none; /* Prevent text selection */
+    white-space: nowrap; /* Prevent wrapping */
+}
+.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--box-shadow-light);
+}
+.button:active, button:active, input[type="submit"]:active, input[type="reset"]:active, input[type="button"]:active {
+    transform: translateY(0px);
+    box-shadow: none;
+}
+.button:disabled, button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none;
+    transform: none;
+}
+
+.button-primary, #search-button {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+}
+.button-primary:hover, #search-button:hover {
+    background-color: darken(var(--primary-color), 10%);
+    border-color: darken(var(--primary-color), 10%);
+    color: #f58787;
+}
+
+.button-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #ffffff;
+}
+.button-secondary:hover {
+    background-color: darken(var(--secondary-color), 10%);
+    border-color: darken(var(--secondary-color), 10%);
+    color: #f18181;
+}
+
+.button-accent {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--dark-gray);
+}
+.button-accent:hover {
+    background-color: darken(var(--accent-color), 10%);
+    border-color: darken(var(--accent-color), 10%);
+    color: var(--dark-gray);
+}
+
+.button-small {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: inline-block; /* Changed from block for potential inline alignment */
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color-muted);
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-family: inherit;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid var(--border-gray);
+    border-radius: var(--border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    color: var(--text-color);
+    background-color: #fff;
+    border-color: lighten(var(--primary-color), 25%);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.25); /* Focus ring */
+}
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* --- 6. Header Styles --- */
+.site-header {
+    background-color: #ffffff;
+    padding: 0; /* Padding is handled by container */
+    box-shadow: var(--box-shadow-light);
+    position: fixed; /* Make header sticky */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure header is above other content */
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+.logo img {
+    height: 40px; /* Adjust logo height */
+    margin-right: 10px;
+}
+.logo-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Spacing between nav items */
+    padding-left: 0; /* Override default UL padding */
+    margin-bottom: 0; /* Override default UL margin */
+}
+.main-navigation .nav-link {
+    color: var(--dark-gray);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 5px 0; /* Padding for larger clickable area */
+    position: relative; /* For the underline effect */
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+.main-navigation .nav-link::after { /* Underline effect */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px; /* Position slightly below text */
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+.main-navigation .nav-link:hover,
+.main-navigation .nav-link.active {
+    color: var(--primary-color);
+}
+.main-navigation .nav-link:hover::after,
+.main-navigation .nav-link.active::after {
+    width: 100%; /* Show underline on hover/active */
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Hamburger Icon Styling */
+#mobile-menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 1101; /* Ensure it's above overlay when closed */
+}
+.hamburger-icon {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background-color: var(--dark-gray);
+    transition: background-color 0s 0.2s linear; /* Delay background clear on close */
+}
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--dark-gray);
+    transition: transform 0.2s ease-in-out;
+}
+.hamburger-icon::before { top: -7px; }
+.hamburger-icon::after { bottom: -7px; }
+
+/* Hamburger animation when menu is open */
+#mobile-menu-toggle[aria-expanded="true"] .hamburger-icon {
+    background-color: transparent; /* Middle line disappears */
+    transition-delay: 0s;
+}
+#mobile-menu-toggle[aria-expanded="true"] .hamburger-icon::before {
+    transform: translateY(7px) rotate(45deg);
+}
+#mobile-menu-toggle[aria-expanded="true"] .hamburger-icon::after {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- 7. Mobile Menu Styles --- */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1100; /* Below toggle when closed, above everything else */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear;
+}
+.mobile-menu-overlay[aria-modal="true"]:not([hidden]) { /* Show when not hidden */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s 0s linear;
+}
+
+.mobile-menu-container {
+    /* Optional: Add padding or max-width if needed */
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: flex-end; /* Position close button */
+    padding-bottom: 20px;
+}
+
+#mobile-menu-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.mobile-navigation ul {
+    list-style: none;
+    padding-left: 0;
+}
+.mobile-navigation li {
+    margin-bottom: 25px;
+}
+.mobile-navigation a {
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.mobile-navigation a:hover {
+    color: var(--accent-color);
+}
+
+/* --- 8. Hero Section --- */
+#hero {
+    /* Use pseudo-element for overlay to allow background image change easily */
+    position: relative;
+    background: url('../images/hero-bg.jpg') no-repeat center center/cover;
+    color: white;
+    padding: clamp(60px, 15vh, 120px) 20px; /* Responsive padding */
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden; /* Contain pseudo-element */
+}
+#hero::before { /* Gradient overlay */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 50, 100, 0.7), rgba(0, 20, 40, 0.85));
+    z-index: 1;
+}
+.hero-content {
+    position: relative; /* Place content above overlay */
+    z-index: 2;
+    max-width: 800px;
+}
+.hero-content h1 {
+    color: white;
+    margin-bottom: 0.5em;
+    font-size: clamp(2.2rem, 6vw, 3.5rem); /* Responsive H1 */
+}
+.hero-content p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem); /* Responsive paragraph */
+    margin-bottom: 2em;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+}
+
+#search-form {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center;
+    align-items: stretch; /* Make items same height */
+    max-width: 650px;
+    margin: 0 auto;
+    gap: 10px;
+}
+#search-input {
+    flex-grow: 1; /* Input takes available space */
+    min-width: 250px; /* Prevent input getting too small */
+    padding: 12px 20px; /* Adjust padding */
+    border-radius: var(--border-radius); /* Match button */
+    font-size: 1rem;
+    border: 1px solid var(--border-gray); /* Add border */
+}
+#search-button {
+    padding: 12px 25px; /* Match input height */
+    white-space: nowrap; /* Prevent button text wrapping */
+    flex-shrink: 0; /* Prevent button shrinking */
+}
+
+/* --- 9. Search Loader --- */
+.loader {
+  border: 5px solid var(--light-gray); /* Light grey */
+  border-top: 5px solid var(--primary-color); /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto 0; /* Centered below search or results */
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- 10. Results Section & Product Cards --- */
+#results-section {
+    padding: 60px 0;
+    background-color: #fff; /* Ensure white background */
+    min-height: 300px; /* Give space even when empty */
+}
+#results-section h2 {
+    margin-bottom: 1.5em;
+}
+#results-container {
+    margin-top: 30px;
+}
+.placeholder-text {
+    text-align: center;
+    color: var(--text-color-muted);
+    font-size: 1.1rem;
+    margin-top: 40px;
+}
+.error-text { /* Style for error messages */
+    color: var(--danger-color);
+    font-weight: bold;
+    background-color: var(--danger-bg-light);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid darken(var(--danger-bg-light), 10%);
+}
+
+/* Product Card Styles (Integrated from previous JS injection) */
+.product-card {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    margin-bottom: 25px;
+    box-shadow: var(--box-shadow-light);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    flex-wrap: wrap;
+}
+.product-card:hover {
+     box-shadow: var(--box-shadow-medium);
+     transform: translateY(-2px);
+}
+.product-image {
+    flex: 0 0 180px; /* Fixed width for image container */
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-gray);
+}
+.product-image img {
+    max-width: 100%;
+    max-height: 150px; /* Limit image height */
+    object-fit: contain; /* Scale image while preserving aspect ratio */
+    border-radius: calc(var(--border-radius) / 2); /* Slight rounding */
+}
+.product-details {
+    flex: 1 1 300px; /* Allow grow/shrink, base width 300px */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Prevent flex item overflow */
+}
+.product-details h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem; /* Slightly smaller card headings */
+    color: var(--primary-color);
+    line-height: 1.4;
+}
+.product-description {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    margin-bottom: 15px;
+    flex-grow: 1; /* Push price comparison down */
+    line-height: 1.5;
+}
+.price-comparison {
+    display: flex;
+    gap: 15px; /* Space between price sources */
+    margin-bottom: 15px;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+.price-source {
+    border: 1px solid var(--medium-gray);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    background-color: var(--light-gray);
+    flex: 1 1 160px; /* Grow/shrink, aim for ~160px width */
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.platform-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-color-muted);
+    margin-bottom: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.price-value {
+    display: block; /* Ensure it takes its own line if needed */
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 5px; /* Space before link */
+}
+.price-source.lower-price {
+    border-color: var(--secondary-color);
+    background-color: var(--success-bg-light); /* Light green background */
+}
+.price-source.lower-price .price-value {
+     color: var(--success-color); /* Darker green text for lower price */
+}
+.visit-link {
+    font-size: 0.85rem;
+    display: inline-block;
+    text-decoration: underline;
+    font-weight: 600;
+}
+.visit-link:hover {
+    text-decoration: none;
+}
+.price-difference {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 5px;
+    font-size: 0.9rem;
+    text-align: right; /* Align difference to the right */
+}
+.price-unavailable {
+    font-style: italic;
+    color: var(--text-color-muted);
+    font-size: 1.1rem;
+}
+
+/* --- 11. Content Sections (How-it-works, About, etc.) --- */
+.content-section {
+    padding: 60px 20px;
+}
+.alt-bg {
+    background-color: var(--light-gray);
+}
+
+/* How It Works Steps */
+#how-it-works .steps-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+#how-it-works .step {
+    flex-basis: 30%; /* Aim for 3 columns on large screens */
+    min-width: 280px; /* Ensure minimum width */
+    text-align: center;
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#how-it-works .step:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-medium);
+}
+#how-it-works .step-number {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+#how-it-works .step h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+#how-it-works .step p {
+    font-size: 0.95rem;
+    color: var(--text-color-muted);
+}
+
+.disclaimer {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    text-align: center;
+    margin-top: 30px;
+    font-style: italic;
+}
+
+#about-gem p {
+    max-width: 800px;
+    margin: 0 auto 1em;
+    text-align: center;
+    line-height: 1.7;
+}
+#about-gem .cta-button {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 0;
+}
+
+/* --- 12. Page Specific Styles (Shared) --- */
+/* Shared header for static pages like About, Contact */
+.page-header {
+    background-color: var(--light-gray);
+    padding: 40px 0;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--medium-gray);
+}
+.page-header h1 {
+     color: var(--primary-color);
+     margin-bottom: 0;
+     text-align: center;
+}
+
+/* Content wrapper for static pages */
+.page-content-wrapper {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+.page-content-wrapper h2 {
+    text-align: left;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid var(--medium-gray);
+}
+.page-content-wrapper h2:first-child {
+    margin-top: 0;
+}
+.page-content-wrapper p, .page-content-wrapper ul {
+    line-height: 1.8;
+    margin-bottom: 1.5em;
+}
+.page-content-wrapper ul {
+    list-style: disc;
+    margin-left: 25px; /* Indentation for lists */
+}
+
+/* How it works page specific step detail */
+.how-it-works-content .step-detail {
+     margin-bottom: 2.5em;
+     padding: 25px;
+     background-color: #fff;
+     border-left: 5px solid var(--primary-color);
+     box-shadow: 2px 3px 10px rgba(0,0,0,0.06);
+     border-radius: 0 var(--border-radius) var(--border-radius) 0; /* Rounded corners except left */
+ }
+.how-it-works-content .step-detail h3 {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+     margin-bottom: 0.8em;
+     font-size: 1.4rem;
+     border-bottom: none; /* Override default page h3 border */
+     padding-bottom: 0;
+     text-align: left;
+}
+.how-it-works-content .step-number-inline {
+    display: inline-flex; /* Use flex for alignment */
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent shrinking */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-right: 15px;
+ }
+.how-it-works-content p, .how-it-works-content ul {
+    line-height: 1.7;
+    margin-bottom: 1em;
+    padding-left: 50px; /* Indent text relative to step number */
+}
+.how-it-works-content ul {
+    list-style: disc;
+    margin-left: 20px; /* Additional indent for list items */
+ }
+.how-it-works-content .note {
+     background-color: var(--light-gray);
+     padding: 15px 20px 15px 50px; /* Match indent */
+     border-radius: var(--border-radius);
+     font-size: 0.9rem;
+     color: #555;
+     margin-top: 15px;
+     position: relative;
+     border: 1px solid var(--medium-gray);
+ }
+.how-it-works-content .note::before {
+     content: "ℹ️"; /* Info icon */
+     position: absolute;
+     left: 18px;
+     top: 14px;
+     font-size: 1.2rem;
+ }
+
+/* Contact Page Specifics */
+.contact-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.contact-form-section, .contact-info-section {
+    flex: 1;
+    min-width: 300px; /* Minimum width before wrapping */
+}
+.contact-info-section p {
+     position: relative;
+     padding-left: 30px; /* Space for icon */
+     margin-bottom: 1em;
+}
+.contact-info-section p i.icon-placeholder { /* Placeholder for icons */
+     position: absolute;
+     left: 0;
+     top: 5px;
+     width: 20px;
+     text-align: center;
+     color: var(--primary-color);
+     font-style: normal; /* Prevent italic if using <i> */
+     font-weight: bold;
+ }
+/* Contact form status message */
+ #form-status {
+     margin-top: 15px;
+     padding: 12px 15px;
+     border-radius: var(--border-radius);
+     text-align: center;
+     font-weight: 600;
+     display: none; /* Hidden by default */
+     border: 1px solid transparent;
+ }
+ #form-status.success {
+     background-color: var(--success-bg-light);
+     color: var(--success-color);
+     border-color: darken(var(--success-bg-light), 10%);
+     display: block;
+ }
+ #form-status.error {
+     background-color: var(--danger-bg-light);
+     color: var(--danger-color);
+     border-color: darken(var(--danger-bg-light), 10%);
+     display: block;
+ }
+
+
+/* --- 13. Footer Styles --- */
+.site-footer {
+    background-color: var(--dark-gray);
+    color: #ccc; /* Lighter text for dark background */
+    padding-top: 50px;
+    margin-top: 60px; /* Space above footer */
+    font-size: 0.95rem;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* Allow wrapping */
+    padding-bottom: 40px;
+}
+
+.footer-column {
+    flex: 1; /* Allow flex items to grow/shrink */
+    min-width: 220px; /* Prevent columns from becoming too narrow */
+}
+
+.site-footer h4 {
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.site-footer h4::after { /* Underline effect for footer headings */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.footer-about p {
+    line-height: 1.7;
+    margin-bottom: 1em;
+}
+.footer-about .disclaimer {
+    font-size: 0.85rem;
+    margin-top: 15px;
+    font-style: italic;
+    color: #aaa;
+    text-align: left;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding-left: 0; /* Remove default padding */
+}
+.footer-links li {
+    margin-bottom: 12px;
+}
+.footer-links a {
+    color: #ccc;
+    transition: color 0.2s ease, padding-left 0.3s ease;
+}
+.footer-links a:hover {
+    color: white;
+    padding-left: 5px; /* Slight indent on hover */
+}
+
+.footer-contact p {
+    margin-bottom: 15px;
+    display: flex; /* Align icon and text */
+    align-items: flex-start; /* Align items to top */
+}
+.footer-contact p i.icon-placeholder {
+    margin-right: 10px;
+    margin-top: 3px; /* Adjust icon vertical alignment */
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+.footer-contact a {
+    color: #ccc;
+}
+.footer-contact a:hover {
+    color: white;
+}
+
+.footer-social {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+.footer-social .social-icon {
+    color: #ccc;
+    font-size: 1.4rem; /* Adjust size for icons */
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block; /* Ensure transform works */
+}
+.footer-social .social-icon:hover {
+    color: white;
+    transform: scale(1.1);
+}
+/* Add specific colors if needed */
+/* .social-icon.twitter:hover { color: #1DA1F2; } */
+/* .social-icon.linkedin:hover { color: #0A66C2; } */
+/* .social-icon.facebook:hover { color: #1877F2; } */
+
+
+.footer-bottom {
+    background-color: #212529; /* Even darker shade */
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px; /* Space above the bottom bar */
+    font-size: 0.9rem;
+    border-top: 1px solid #444;
+}
+.footer-bottom p {
+    margin: 0;
+    color: #aaa;
+}
+
+
+/* --- 14. Responsive Design (Media Queries) --- */
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+    .container { max-width: 960px; }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    .container { max-width: 720px; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    .hero-content h1 { font-size: 2.8rem; }
+
+    .main-navigation { display: none; } /* Hide desktop nav */
+    #mobile-menu-toggle { display: block; } /* Show hamburger */
+
+    #how-it-works .step {
+        flex-basis: 45%; /* 2 columns */
+    }
+
+    .product-image { flex: 0 0 150px; } /* Slightly smaller image area */
+    .product-details { flex-basis: 350px; }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    .container { max-width: 540px; padding-left: 15px; padding-right: 15px; }
+    :root { --header-height: 60px; } /* Reduce header height */
+    main { padding-top: 60px; } /* Adjust main padding */
+    body { font-size: 15px; } /* Slightly smaller base font */
+
+    .logo-text { font-size: 1.4rem; }
+
+    #hero { padding: 80px 15px; min-height: 45vh; }
+    .hero-content h1 { font-size: 2.2rem; }
+    .hero-content p { font-size: 1rem; }
+
+    #search-form { flex-direction: column; gap: 15px; }
+    #search-input, #search-button { width: 100%; }
+
+    #how-it-works .steps-container { flex-direction: column; align-items: center; }
+    #how-it-works .step { flex-basis: 85%; max-width: 400px; }
+
+    .product-card { flex-direction: column; }
+    .product-image {
+         flex-basis: auto; /* Let height determine size */
+         width: 100%;
+         max-height: 200px;
+         padding: 20px;
+    }
+    .product-image img { max-height: 160px; }
+    .product-details { padding: 15px; flex-basis: auto; }
+    .price-comparison { flex-direction: column; gap: 10px; }
+    .price-source { width: 100%; flex-basis: auto; }
+    .price-difference { text-align: left; margin-top: 10px; }
+
+    .footer-container { flex-direction: column; text-align: center; }
+    .site-footer h4::after { left: 50%; transform: translateX(-50%); } /* Center heading underlines */
+    .footer-social { justify-content: center; }
+    .footer-about .disclaimer { text-align: center; }
+    .footer-contact p { justify-content: center; text-align: left; } /* Align text left but center block */
+    .footer-contact p i.icon-placeholder { position: static; margin-right: 8px; display: inline-block; width: auto; }
+
+    .page-content-wrapper { padding: 0 15px; }
+    .contact-container { gap: 30px; }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .container { padding-left: 10px; padding-right: 10px; } /* Reduce padding further */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    .hero-content h1 { font-size: 2rem; }
+    .content-section { padding: 40px 15px; }
+    .page-header { padding: 30px 0; margin-bottom: 30px; }
+
+    .footer-column { min-width: 100%; } /* Ensure columns stack cleanly */
+    .footer-container { gap: 30px; }
+}
+
+/* --- Add to Product Card Styles Section --- */
+
+.product-card.initial-state .price-comparison-area.results-state,
+.product-card.initial-state .price-comparison-area.loading-state {
+    display: none; /* Hide price areas initially */
+}
+
+.product-card.loading .compare-button {
+    display: none; /* Hide compare button while loading prices */
+}
+
+.product-card.loading .price-comparison-area.loading-state {
+    display: block; /* Show loading indicator area */
+    text-align: center;
+    padding: 20px 0;
+    min-height: 80px; /* Give space for loader */
+}
+.product-card.loading .price-comparison-area.results-state {
+    display: none; /* Hide results area while loading */
+}
+
+
+.product-card.loaded .compare-button {
+    display: none; /* Keep compare button hidden after prices are loaded */
+}
+.product-card.loaded .price-comparison-area.loading-state {
+    display: none; /* Hide loader area once loaded */
+}
+.product-card.loaded .price-comparison-area.results-state {
+    display: block; /* Show results area once loaded */
+    margin-top: 15px; /* Add some space above the loaded prices */
+}
+
+/* Style for the Compare Prices button */
+.compare-button {
+    margin-top: 15px; /* Space above button */
+    width: 100%; /* Make button full width of details area */
+    /* Use secondary color or adjust as needed */
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+}
+.compare-button:hover {
+    background-color: darken(var(--secondary-color), 10%);
+    border-color: darken(var(--secondary-color), 10%);
+}
+
+/* Styling for unavailable price source */
+.price-source.unavailable {
+    opacity: 0.6;
+    background-color: var(--medium-gray);
+    border-color: var(--border-gray);
+}
+/* .price-source.unavailable .platform-label {
+    /* Optional: adjust label style *
+} */
+.availability-info {
+    font-size: 0.8em;
+    font-style: italic;
+    margin-left: 5px;
+    color: var(--text-color-muted);
+}
+
+.price-actions { margin-top: 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.watchlist-btn { padding: 3px 8px; font-size: 0.8rem; /* Adjust as needed */ }
+.watchlist-btn.remove { background-color: var(--secondary-color); color: white; border-color: var(--secondary-color); }
+.watchlist-btn.add { background-color: var(--light-gray); color: var(--primary-color); border: 1px solid var(--primary-color); }
+.watchlist-btn.add:hover { background-color: var(--medium-gray); }
+.watchlist-btn.remove:hover { background-color: darken(var(--secondary-color), 10%); }
+
+/* --- In style.css --- */
+
+/* Style for watchlist page item cards */
+/* ... other watchlist styles ... */
+
+
+
+/* ... other styles ... */
+
+/* Watchlist buttons */
+.price-actions { margin-top: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.watchlist-btn { padding: 4px 8px; font-size: 0.8rem; line-height: 1.4; cursor: pointer; }
+.watchlist-btn.add { background-color: #e9ecef; color: var(--primary-color); border: 1px solid var(--primary-color); }
+.watchlist-btn.add:hover { background-color: #dee2e6; }
+.watchlist-btn.remove.in-watchlist { background-color: var(--danger-color); color: white; border-color: var(--danger-color); }
+.watchlist-btn.remove.in-watchlist:hover { background-color: darken(var(--danger-color), 10%); border-color: darken(var(--danger-color), 10%); }
+
+/* Styles for watchlist page */
+.watchlist-item .product-card { border-left: 5px solid var(--secondary-color); margin-bottom: 20px; }
+.watchlist-item .watched-source-label { display: block; font-weight: bold; color: var(--secondary-color); margin-bottom: 10px; font-size: 0.9rem; }
+.watchlist-item .price-source { background-color: #fff; } /* Optional override */
+
+/* Fade out effect */
+.watchlist-item.removing {
+    transition: opacity 0.4s ease-out, max-height 0.4s ease-out, margin 0.4s ease-out, padding 0.4s ease-out, border 0.4s ease-out;
+    opacity: 0;
+    overflow: hidden;
+    max-height: 0px !important; /* Ensure it collapses */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-width: 0 !important; /* Fade border too */
+    border-left-width: 0 !important;
+}
+
+/* ... other styles ... */
