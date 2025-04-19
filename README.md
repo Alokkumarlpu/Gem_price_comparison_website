@@ -78,7 +78,7 @@ SMTP_PASS=your_email_password
 Use XAMPP or similar to host the project locally and access via:
 
 ```
-http://localhost/gem/
+http://localhost/gem_price-comparison/
 ```
 
 ## 📈 Future Enhancements
@@ -95,7 +95,9 @@ Contributions are welcome! Please fork the repo and submit a pull request. For i
 ## 👤 Author
 
 **Alok Kumar**  
-Legacy.lpu.in
+**Anvesh Mishra**
+**Pallavi Jaiswal**
+**Devesh Jaiswal**
 
 ## 📜 License
 
