@@ -23,8 +23,12 @@ if (IS_DEVELOPMENT) {
 // --- Site Configuration ---
 
 define('SITE_NAME', 'CartClash');
-define('SITE_URL', IS_DEVELOPMENT ? 'http://localhost/gem-price-comparison' : 'https://your_production_domain.com'); // Adjust paths if needed
-define('ADMIN_EMAIL', 'admin@yourdomain.com'); // For error notifications or contact form destination
+// define('SITE_URL', IS_DEVELOPMENT ? 'http://localhost/gem-price-comparison' : 'https://your_production_domain.com'); // Adjust paths if needed
+// define('ADMIN_EMAIL', 'admin@yourdomain.com'); // For error notifications or contact form destination
+
+define('SITE_URL', 'http://localhost/gem_price-comparison'); 
+define('EMAIL_FROM', 'no-reply@yourdomain.com'); 
+define('PASSWORD_RESET_EXPIRY', 3600); // Default: 1 hour
 
 
 // --- Error Reporting ---

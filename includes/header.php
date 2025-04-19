@@ -105,7 +105,7 @@ function calculate_relative_path(string $target_path, bool $current_is_subdir): 
                         <div>
                             <button type="button" class="flex items-center max-w-xs rounded-full bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
-                                <?php echo $avatar_html; // Uses dark:bg-gray-600 for placeholder ?>
+                                <?php echo $avatar_html; ?>
                                 <svg class="ml-1 -mr-1 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                             </button>
                         </div>
@@ -171,10 +171,9 @@ function calculate_relative_path(string $target_path, bool $current_is_subdir): 
                          </div>
                      </div>
                      <div class="space-y-1">
-                          <?php /*
+                          
                           <a href="<?php echo calculate_relative_path('profile.php', $is_subdir_page); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white">Your Profile</a>
-                            ?>
-                           <?php /* Logout link uses standard reds */ ?>
+                            
                         <a href="<?php echo $logout_page_url; ?>" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-300">Logout</a>
                      </div>
                  <?php else: // --- User is Logged Out (Mobile) --- ?>

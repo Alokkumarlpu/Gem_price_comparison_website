@@ -18,9 +18,6 @@ header('X-Frame-Options: DENY'); // Prevent clickjacking
 // Adjust paths if these files are located elsewhere relative to watchlist_handler.php
 require_once __DIR__ . '/config.php';          // Site configuration (DB constants, SITE_NAME, etc.)
 require_once __DIR__ . '/functions.php';        // Helper functions (like output_json_and_exit if defined there)
-require_once __DIR__ . '/db_connect.php';       // Database connection function `connect_db()`
-// require_once __DIR__ . '/../gem/gem_db.php'; // Only include if it defines functions/constants needed here
-
 // --- Response Setup ---
 $response = ['success' => false];
 $http_status_code = 200; // Default success code

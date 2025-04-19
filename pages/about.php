@@ -80,24 +80,24 @@ $page_title = "About Us - " . escape_html(SITE_NAME);
       <h2 class="text-3xl font-bold text-center mb-8">Meet the Team</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div class="team-member bg-white rounded-lg shadow-lg p-6 text-center transition-colors duration-300">
-          <img src="../images/anvesh.jpeg" alt="Anvesh" class="mx-auto rounded-full mb-4 border-4 border-purple-200">
+          <img src="../images/anvesh.jpeg" alt="Anvesh" class="ml-16 w-40 h-40 rounded-full mb-4 border-4 border-purple-200">
           <h4 class="text-xl font-semibold">Anvesh</h4>
           <p class="text-gray-600 transition-colors duration-300">Founder & Developer</p>
         </div>
         <div class="team-member bg-white rounded-lg shadow-lg p-6 text-center transition-colors duration-300">
-          <img src="../images/pallavi.jpeg" alt="Pallavi" class="mx-auto rounded-full mb-4 border-4 border-purple-200">
+          <img src="../images/pallavi.jpeg" alt="Pallavi" class="ml-16 w-40 h-40 rounded-full mb-4 border-4 border-purple-200">
           <h4 class="text-xl font-semibold">Pallavi</h4>
-          <p class="text-gray-600 transition-colors duration-300">UX Designer</p>
+          <p class="text-gray-600 transition-colors duration-300">UI Designer</p>
         </div>
         <div class="team-member bg-white rounded-lg shadow-lg p-6 text-center transition-colors duration-300">
-          <img src="../images/devesh.jpeg" alt="Devesh" class="mx-auto rounded-full mb-4 border-4 border-purple-200">
+          <img src="../images/devesh.jpeg" alt="Devesh" class="ml-16 w-40 h-40 flex justify-center item-center rounded-full mb-4 border-4 border-purple-200">
           <h4 class="text-xl font-semibold">Devesh</h4>
           <p class="text-gray-600 transition-colors duration-300">Data Analyst</p>
         </div>
         <div class="team-member bg-white rounded-lg shadow-lg p-6 text-center transition-colors duration-300">
-          <img src="../images/alok.jpeg" alt="Alok" class="mx-auto rounded-full mb-4 border-4 border-purple-200">
+          <img src="../images/alok.jpeg" alt="Alok" class="ml-16 w-40 h-40 rounded-full mb-4 border-4 border-purple-200">
           <h4 class="text-xl font-semibold">Alok</h4>
-          <p class="text-gray-600 transition-colors duration-300">Marketing Lead</p>
+          <p class="text-gray-600 transition-colors duration-300">Backend Developer</p>
         </div>
       </div>
     </div>
