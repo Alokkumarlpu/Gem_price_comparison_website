@@ -49,13 +49,55 @@ CREATE TABLE IF NOT EXISTS `prices` (
 
 
 
-CREATE TABLE IF NOT EXISTS `accounts` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
-  	`username` varchar(50) NOT NULL,
-  	`password` varchar(255) NOT NULL,
-  	`email` varchar(100) NOT NULL,
-	`registered` datetime NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ 
+ CREATE TABLE IF NOT EXISTS `watchlist_items` (
+  `item_id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the watchlist entry',
+  `user_id` INT UNSIGNED NOT NULL COMMENT 'Foreign key linking to the users table',
+  `product_id` INT UNSIGNED NOT NULL COMMENT 'Foreign key linking to the products table',
+  `source` VARCHAR(50) NOT NULL COMMENT 'Which source listing is being watched (e.g., GeM, Amazon)',
+  `added_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp when the item was added',
+  PRIMARY KEY (`item_id`),
+  INDEX `idx_watchlist_user_id` (`user_id`),
+  INDEX `idx_watchlist_product_id` (`product_id`),
+  UNIQUE KEY `uq_user_product_source` (`user_id`, `product_id`, `source`),
+  CONSTRAINT `fk_watchlist_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_watchlist_product`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `products` (`product_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Items saved by users to their watchlist';
 
-INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `registered`) VALUES (1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@example.com', '2025-01-01 00:00:00'); 
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the user',
+  `username` VARCHAR(50) NOT NULL COMMENT 'User chosen username',
+  `email` VARCHAR(255) NOT NULL COMMENT 'User email address, used for login/recovery',
+  `password_hash` VARCHAR(255) NOT NULL COMMENT 'Hashed user password (use password_hash() in PHP)',
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp when the user registered',
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp when user info was last updated',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `uq_username` (`username`),
+  UNIQUE KEY `uq_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='User account information';
+
+-- SQL for `password_resets` table using DATETIME
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `reset_id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the reset request',
+  `user_id` INT UNSIGNED NOT NULL COMMENT 'Foreign key linking to the users table',
+  `token_hash` VARCHAR(255) NOT NULL COMMENT 'Hashed version of the reset token (store securely)',
+  `selector` VARCHAR(32) NULL COMMENT 'Optional: Selector for lookup if using selector/verifier pattern',
+  `requested_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp when the reset was requested',
+  `expires_at` DATETIME NOT NULL COMMENT 'Timestamp when the token expires', -- Changed to DATETIME
+  PRIMARY KEY (`reset_id`),
+  INDEX `idx_reset_user_id` (`user_id`),
+  INDEX `idx_reset_expires_at` (`expires_at`),
+  CONSTRAINT `fk_password_reset_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores password reset tokens and expiry';
