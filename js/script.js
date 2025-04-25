@@ -16,15 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const initialLoader = document.getElementById('initial-loader');
     const listingHeading = document.getElementById('listing-heading');
 
-    // --- Mobile Menu Elements ---
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-
-    /** Mobile Menu Functionality */
-    if (mobileMenuToggle && mobileMenu && mobileMenuClose) {
-        const openMenu=()=>{mobileMenu.hidden=!1;setTimeout(()=>{mobileMenu.setAttribute("aria-modal","true");mobileMenuToggle.setAttribute("aria-expanded","true");document.body.style.overflow="hidden";if(mainContent)mainContent.setAttribute("aria-hidden","true");mobileMenuClose.focus()},10)};const closeMenu=()=>{mobileMenu.removeAttribute("aria-modal");mobileMenuToggle.setAttribute("aria-expanded","false");mobileMenu.addEventListener("transitionend",function handleTransitionEnd(){mobileMenu.hidden=!0;mobileMenu.removeEventListener("transitionend",handleTransitionEnd)},{once:!0});document.body.style.overflow="";if(mainContent)mainContent.removeAttribute("aria-hidden");mobileMenuToggle.focus()};mobileMenuToggle.addEventListener("click",()=>{const e=mobileMenuToggle.getAttribute("aria-expanded")==="true";if(!e)openMenu();else closeMenu()});mobileMenuClose.addEventListener("click",closeMenu);document.addEventListener("keydown",e=>{if(e.key==="Escape"&&mobileMenuToggle.getAttribute("aria-expanded")==="true")closeMenu()});mobileMenu.addEventListener("click",e=>{if(e.target===mobileMenu)closeMenu()});
-    }
 
     /** Load Initial Products */
     function loadInitialProducts() {

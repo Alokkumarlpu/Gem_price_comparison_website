@@ -169,7 +169,6 @@ $csrf_token = $_SESSION['csrf_token'] ?? 'token_error'; // Ensure it's always de
 
     <?php include __DIR__ . '/includes/footer.php'; ?>
 
-    <?php /* Optional: Add client-side validation script here if desired */ ?>
     <script>
         // Basic example: You might add more sophisticated validation
         const form = document.getElementById('login-form');

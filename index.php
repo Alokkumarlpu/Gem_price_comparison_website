@@ -32,7 +32,7 @@ require_once __DIR__ . '/php/functions.php';
 
 
         <!-- Simplified Hero Section (HTML Unchanged) -->
-        <header class="bg-purple-500 text-white transition-colors duration-300">
+        <header class="bg-purple-500 text-white">
             <div class="container mx-auto"> <?php /* Added mx-auto for centering */ ?>
                 <div class="flex flex-col items-center md:flex-row md:justify-between">
                     <div class="m-10 md:ml-20 text-center md:text-left"> <?php /* Centered text on mobile */ ?>
@@ -193,7 +193,6 @@ require_once __DIR__ . '/php/functions.php';
             </div>
         </section>
 
-    <!-- </main> <?php // Moved main closing tag here ?> -->
 
     <?php include __DIR__ . '/includes/footer.php'; // Include Footer ?>
 
@@ -205,13 +204,7 @@ require_once __DIR__ . '/php/functions.php';
         // Add event listeners for other interactive elements
         document.addEventListener('DOMContentLoaded', function() {
             // Button event listeners (placeholders)
-            const searchBtn = document.getElementById('search-btn'); // Ensure an element with this ID exists if needed
-            if (searchBtn) {
-                searchBtn.addEventListener('click', function() {
-                    console.log('Search button clicked - Implement search logic.');
-                    // Example: window.location.href = '/search?query=...';
-                });
-            }
+            
 
             const loadMoreBtn = document.getElementById('load-more');
             if (loadMoreBtn) {
@@ -236,7 +229,7 @@ require_once __DIR__ . '/php/functions.php';
                         if (!isLoggedIn) {
                             alert('Please log in to save items to your watchlist.');
                             // Optional: Redirect to login
-                            // window.location.href = 'login.php';
+                             window.location.href = 'login.php';
                             return;
                         }
 
@@ -246,13 +239,13 @@ require_once __DIR__ . '/php/functions.php';
                             icon.classList.add('fas'); // Change to solid bookmark
                             button.childNodes[2].nodeValue = ' Saved'; // Change text node
                              console.log(`Attempting to ADD product ID: ${productId} to watchlist via AJAX...`);
-                             // alert(`Product ${productId} added to watchlist (simulation).`); // Replace with actual AJAX
+                              alert(`Product ${productId} added to watchlist (simulation).`); // Replace with actual AJAX
                         } else { // If it's currently 'saved'
                             icon.classList.remove('fas');
                             icon.classList.add('far'); // Change back to regular bookmark
                             button.childNodes[2].nodeValue = ' Save for later'; // Change text node back
                              console.log(`Attempting to REMOVE product ID: ${productId} from watchlist via AJAX...`);
-                             // alert(`Product ${productId} removed from watchlist (simulation).`); // Replace with actual AJAX
+                             alert(`Product ${productId} removed from watchlist (simulation).`); // Replace with actual AJAX
                         }
                          // Implement actual AJAX call here to add/remove from watchlist using watchlist_handler.php
                     }

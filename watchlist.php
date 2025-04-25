@@ -160,7 +160,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page_title; ?></title>
-    <script src="https://cdn.tailwindcss.com"></script> <?php // Assumes Tailwind is used ?>
+    <script src="https://cdn.tailwindcss.com"></script> 
     <?php /* Favicon links - Use absolute paths from web root */ ?>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
